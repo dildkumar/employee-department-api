@@ -2,6 +2,7 @@ package com.example.employeedepartment.service;
 
 import com.example.employeedepartment.model.Department;
 import com.example.employeedepartment.repository.IDepartmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Optional;
 public class DepartmentService implements IDepartmentService {
     private final IDepartmentRepository departmentRepository;
 
+    @Autowired
     public DepartmentService(IDepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
     }
