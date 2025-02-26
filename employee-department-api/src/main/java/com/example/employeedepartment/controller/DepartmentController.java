@@ -1,8 +1,7 @@
 package com.example.employeedepartment.controller;
 
 import com.example.employeedepartment.model.Department;
-import com.example.employeedepartment.repository.DepartmentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.employeedepartment.service.IDepartmentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,21 +10,24 @@ import java.util.List;
 @RequestMapping("/departments")
 public class DepartmentController {
 
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    private final IDepartmentService departmentService;
+
+    public DepartmentController(IDepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @GetMapping
     public List<Department> getAllDepartments() {
-        return departmentRepository.findAll();
+        return departmentService.getAllDepartment();
     }
 
     @PostMapping
     public Department createDepartment(@RequestBody Department department) {
-        return departmentRepository.save(department);
+        return departmentService.saveDepartment(department);
     }
 
     @DeleteMapping
-    public void deleteDepartment() {
-         departmentRepository.deleteAll();
+    public void deleteDepartmentbyId(@PathVariable Long departmentId) {
+        departmentService.deleteDepartmentbyId(departmentId);
     }
 }
